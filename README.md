@@ -8,25 +8,21 @@ PatternKit is a proof of concept. It is in an early stage of design and should n
 
 ### Basic matching, sequence of elements
 
+The `matches(with:)` method returns a lazy collection with all non-overlapping matches for the pattern throughout the collection being searched.
+
+You can make a pattern for a simple sequence of elements with the postfix `/` operator.
+
 ```Swift
-// The `matches(with:)` method returns a lazy collection with all  
-// non-overlapping matches for the pattern throughout the  
-// collection being searched.
-// 
-// Make a pattern for a simple sequence of elements with the 
-// postfix `/` operator.
 let greetingCount = text.matches(with: "hi"/).count
 ```
 
 ### Getting match contents, choosing between two possibilities
 
+`matches(with:)` returns a series of `PatternMatch` instances; each contains a `SubSequence` of the original collection, including its range, which matched the pattern.
+
+Use `|` to match either of two patterns. The leftmost pattern is preferred.
+
 ```swift
-// `matches(with:)` returns a series of `PatternMatch` instances; 
-// each contains a `SubSequence` of the original collection, 
-// including its range, which matched the pattern.
-// 
-// Use `|` to match either of two patterns. The leftmost pattern 
-// is preferred.
 for match in text.matches(with: "hello"/ | "hi"/) {
     print(match.contents)
 }
@@ -34,10 +30,11 @@ for match in text.matches(with: "hello"/ | "hi"/) {
 
 ### Getting match ranges, concatenating patterns
 
+`PatternMatch` also contains a `range` for the match.
+
+Use `+` to join two patterns together. The first pattern must match first, then the second.
+
 ```swift
-// `PatternMatch` also contains a `range` for the match.
-// 
-// Use `+` to join two patterns together.
 for match in text.matches(with: ("hello"/ | "hi"/) + ", world!"/) {
     print(match.range)
 }
@@ -45,16 +42,11 @@ for match in text.matches(with: ("hello"/ | "hi"/) + ", world!"/) {
 
 ### Pre-constructing patterns, matching elements against possibilities
 
+The `C.pattern(_:)` method lets you pre-construct a pattern to match against a collection of type `C`. You can use this for many purposes, but it's especially handy for subpatterns you use in several places.
+
+Use `any(where:)`, `any(of:)`, `any(_:)`, or `any()` to test an element against an arbitrary predicate, membership in a collection, existence in a list, or simply accept any element. You can negate with a prefix `!`.
+
 ```swift
-// The `C.pattern(_:)` method lets you pre-construct a 
-// pattern to match against a collection of type `C`. You can 
-// use this for many purposes, but it's especially handy for 
-// subpatterns you use in several places.
-// 
-// Use `any(where:)`, `any(of:)`, `any(_:)`, or `any()` to test 
-// an element against an arbitrary predicate, membership in a 
-// collection, existence in a list, or simply accept any element.
-// You can negate with a prefix `!`.
 let d = String.pattern(any(of: "0123456789"))
 let phoneNumbers = text.matches(with: d+d+d + "-"/ + d+d+d + "-"/ + d+d+d+d)
     .map { $0.contents }.sorted()
@@ -62,13 +54,9 @@ let phoneNumbers = text.matches(with: d+d+d + "-"/ + d+d+d + "-"/ + d+d+d+d)
 
 ### Repeating subpatterns
 
+Match a subpattern 0 times or more with `*`, 1 time or more with `+`, 0 or 1 times with `%`, or any other number of times with the `repeating(_: Int)` or `repeating(_: RangeExpression)` methods. Repetitions are greedy and support all the backtracking behavior you would expect from a regular expression.
+
 ```swift
-// Match a subpattern 0 times or more with `*`, 1 time or more 
-// with `+`, 0 or 1 times with `%`, or any other number of times 
-// with the `repeating(_: Int)` or `repeating(_: RangeExpression)` 
-// methods. Repetitions are greedy and support all the  
-// backtracking behavior you would expect from a regular 
-// expression.
 let animaniacsCatcalls =
     text.matches(with: "Hell"/ + ("o"/)+ + ", Nurse!")
         .map { $0.contents }
@@ -76,13 +64,11 @@ let animaniacsCatcalls =
 
 ### Non-string patterns
 
+Patterns can be matched in any `Collection` of `Hashable` elements not just strings.
+
+PatternKit offers a number of convenience methods on `Collection`, including `firstMatch(with:)`, `ranges(with:)`, `range(with:)`, `index(with:)`, and `contains(_:)`.
+
 ```swift
-// Patterns can be matched in any `Collection` of `Hashable` 
-// elements not just strings.
-// 
-// PatternKit offers a number of convenience methods on 
-// `Collection`, including `firstMatch(with:)`, `ranges(with:)`, 
-// `range(with:)`, `index(with:)`, and `contains(_:)`.
 if numbers.contains([1, 2, 3, 4, 5]/) {
     print("That's the stupidest combination I've ever heard in my life!")
 }
@@ -112,6 +98,7 @@ When implementing patterns, you may find the `trace(…)` function useful. It wr
 ### Uncertain design questions
 
 * Do we need the `PatternMatch` type, or can we just return a `SubSequence`? This probably depends on how capturing works.
+* How many matching methods do we want, and with what sort of naming convention?
 
 ### Just need to do
 
