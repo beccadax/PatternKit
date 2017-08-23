@@ -39,7 +39,7 @@ for match in text.matches(with: "hello"/ | "hi"/) {
 // 
 // Use `+` to join two patterns together.
 for match in text.matches(with: ("hello"/ | "hi"/) + ", world!"/) {
-    print(match.contents)
+    print(match.range)
 }
 ```
 
@@ -77,6 +77,12 @@ let animaniacsCatcalls =
 ### Non-string patterns
 
 ```swift
+// Patterns can be matched in any `Collection` of `Hashable` 
+// elements not just strings.
+// 
+// PatternKit offers a number of convenience methods on 
+// `Collection`, including `firstMatch(with:)`, `ranges(with:)`, 
+// `range(with:)`, `index(with:)`, and `contains(_:)`.
 if numbers.contains([1, 2, 3, 4, 5]/) {
     print("That's the stupidest combination I've ever heard in my life!")
 }
