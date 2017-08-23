@@ -7,9 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844706091F4D8464003B481D /* SequenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844706081F4D8464003B481D /* SequenceWindow.swift */; };
+		8447060B1F4D84A4003B481D /* SearchSkipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447060A1F4D84A4003B481D /* SearchSkipper.swift */; };
+		8447060E1F4E3E26003B481D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8447060D1F4E3E26003B481D /* LICENSE */; };
 		8459D1881F483EB1004AC3AD /* PatternKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8459D17E1F483EB1004AC3AD /* PatternKit.framework */; };
-		8459D18D1F483EB1004AC3AD /* PatternKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D18C1F483EB1004AC3AD /* PatternKitTests.swift */; };
+		8459D18D1F483EB1004AC3AD /* PatternTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D18C1F483EB1004AC3AD /* PatternTests.swift */; };
 		8459D18F1F483EB1004AC3AD /* PatternKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8459D1811F483EB1004AC3AD /* PatternKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8459D1B01F483F24004AC3AD /* AlternationPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1A31F483EC2004AC3AD /* AlternationPattern.swift */; };
+		8459D1B21F483F24004AC3AD /* MatchCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D19F1F483EC2004AC3AD /* MatchCollection.swift */; };
+		8459D1B31F483F24004AC3AD /* ComparableRangeExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1A11F483EC2004AC3AD /* ComparableRangeExpression.swift */; };
+		8459D1B41F483F24004AC3AD /* ConcatenationPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1A21F483EC2004AC3AD /* ConcatenationPattern.swift */; };
+		8459D1B51F483F24004AC3AD /* CollectionPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1991F483EC2004AC3AD /* CollectionPattern.swift */; };
+		8459D1B61F483F24004AC3AD /* ElementPredicatePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D19C1F483EC2004AC3AD /* ElementPredicatePattern.swift */; };
+		8459D1B71F483F24004AC3AD /* GreedyRepetitionPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D19A1F483EC2004AC3AD /* GreedyRepetitionPattern.swift */; };
+		8459D1B81F483F24004AC3AD /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1981F483EC2004AC3AD /* Pattern.swift */; };
+		8459D1B91F483F24004AC3AD /* PatternDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D19B1F483EC2004AC3AD /* PatternDSL.swift */; };
+		8459D1BA1F483F24004AC3AD /* PatternMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D19D1F483EC2004AC3AD /* PatternMatch.swift */; };
+		8459D1BD1F48428E004AC3AD /* TracePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D1BC1F48428E004AC3AD /* TracePattern.swift */; };
+		848320681F49B2B60091F6A2 /* FloatingStartPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848320671F49B2B60091F6A2 /* FloatingStartPattern.swift */; };
+		84BF91091F4D678700ADD647 /* InterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BF91081F4D678700ADD647 /* InterfaceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +39,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		844706081F4D8464003B481D /* SequenceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceWindow.swift; sourceTree = "<group>"; };
+		8447060A1F4D84A4003B481D /* SearchSkipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSkipper.swift; sourceTree = "<group>"; };
+		8447060C1F4E2EB4003B481D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8447060D1F4E3E26003B481D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8459D17E1F483EB1004AC3AD /* PatternKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PatternKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8459D1811F483EB1004AC3AD /* PatternKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternKit.h; sourceTree = "<group>"; };
 		8459D1821F483EB1004AC3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8459D1871F483EB1004AC3AD /* PatternKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatternKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8459D18C1F483EB1004AC3AD /* PatternKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternKitTests.swift; sourceTree = "<group>"; };
+		8459D18C1F483EB1004AC3AD /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
 		8459D18E1F483EB1004AC3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8459D1981F483EC2004AC3AD /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
+		8459D1991F483EC2004AC3AD /* CollectionPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPattern.swift; sourceTree = "<group>"; };
+		8459D19A1F483EC2004AC3AD /* GreedyRepetitionPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedyRepetitionPattern.swift; sourceTree = "<group>"; };
+		8459D19B1F483EC2004AC3AD /* PatternDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternDSL.swift; sourceTree = "<group>"; };
+		8459D19C1F483EC2004AC3AD /* ElementPredicatePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementPredicatePattern.swift; sourceTree = "<group>"; };
+		8459D19D1F483EC2004AC3AD /* PatternMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternMatch.swift; sourceTree = "<group>"; };
+		8459D19F1F483EC2004AC3AD /* MatchCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollection.swift; sourceTree = "<group>"; };
+		8459D1A11F483EC2004AC3AD /* ComparableRangeExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableRangeExpression.swift; sourceTree = "<group>"; };
+		8459D1A21F483EC2004AC3AD /* ConcatenationPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenationPattern.swift; sourceTree = "<group>"; };
+		8459D1A31F483EC2004AC3AD /* AlternationPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternationPattern.swift; sourceTree = "<group>"; };
+		8459D1BC1F48428E004AC3AD /* TracePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracePattern.swift; sourceTree = "<group>"; };
+		848320671F49B2B60091F6A2 /* FloatingStartPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingStartPattern.swift; sourceTree = "<group>"; };
+		84BF91081F4D678700ADD647 /* InterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +86,8 @@
 		8459D1741F483EB1004AC3AD = {
 			isa = PBXGroup;
 			children = (
+				8447060C1F4E2EB4003B481D /* README.md */,
+				8447060D1F4E3E26003B481D /* LICENSE */,
 				8459D1801F483EB1004AC3AD /* PatternKit */,
 				8459D18B1F483EB1004AC3AD /* PatternKitTests */,
 				8459D17F1F483EB1004AC3AD /* Products */,
@@ -72,6 +107,20 @@
 			isa = PBXGroup;
 			children = (
 				8459D1811F483EB1004AC3AD /* PatternKit.h */,
+				8459D1981F483EC2004AC3AD /* Pattern.swift */,
+				8459D19D1F483EC2004AC3AD /* PatternMatch.swift */,
+				8459D19F1F483EC2004AC3AD /* MatchCollection.swift */,
+				8459D19B1F483EC2004AC3AD /* PatternDSL.swift */,
+				8459D1A31F483EC2004AC3AD /* AlternationPattern.swift */,
+				8459D1A21F483EC2004AC3AD /* ConcatenationPattern.swift */,
+				8459D1991F483EC2004AC3AD /* CollectionPattern.swift */,
+				8459D19C1F483EC2004AC3AD /* ElementPredicatePattern.swift */,
+				8459D19A1F483EC2004AC3AD /* GreedyRepetitionPattern.swift */,
+				848320671F49B2B60091F6A2 /* FloatingStartPattern.swift */,
+				8459D1BC1F48428E004AC3AD /* TracePattern.swift */,
+				8447060A1F4D84A4003B481D /* SearchSkipper.swift */,
+				844706081F4D8464003B481D /* SequenceWindow.swift */,
+				8459D1A11F483EC2004AC3AD /* ComparableRangeExpression.swift */,
 				8459D1821F483EB1004AC3AD /* Info.plist */,
 			);
 			path = PatternKit;
@@ -80,7 +129,8 @@
 		8459D18B1F483EB1004AC3AD /* PatternKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				8459D18C1F483EB1004AC3AD /* PatternKitTests.swift */,
+				8459D18C1F483EB1004AC3AD /* PatternTests.swift */,
+				84BF91081F4D678700ADD647 /* InterfaceTests.swift */,
 				8459D18E1F483EB1004AC3AD /* Info.plist */,
 			);
 			path = PatternKitTests;
@@ -148,6 +198,7 @@
 				TargetAttributes = {
 					8459D17D1F483EB1004AC3AD = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					8459D1861F483EB1004AC3AD = {
 						CreatedOnToolsVersion = 9.0;
@@ -177,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8447060E1F4E3E26003B481D /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +246,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8459D1B81F483F24004AC3AD /* Pattern.swift in Sources */,
+				8459D1B41F483F24004AC3AD /* ConcatenationPattern.swift in Sources */,
+				844706091F4D8464003B481D /* SequenceWindow.swift in Sources */,
+				8459D1B71F483F24004AC3AD /* GreedyRepetitionPattern.swift in Sources */,
+				8459D1BA1F483F24004AC3AD /* PatternMatch.swift in Sources */,
+				8459D1B21F483F24004AC3AD /* MatchCollection.swift in Sources */,
+				8459D1B31F483F24004AC3AD /* ComparableRangeExpression.swift in Sources */,
+				8459D1BD1F48428E004AC3AD /* TracePattern.swift in Sources */,
+				8459D1B51F483F24004AC3AD /* CollectionPattern.swift in Sources */,
+				8459D1B61F483F24004AC3AD /* ElementPredicatePattern.swift in Sources */,
+				8459D1B01F483F24004AC3AD /* AlternationPattern.swift in Sources */,
+				8447060B1F4D84A4003B481D /* SearchSkipper.swift in Sources */,
+				848320681F49B2B60091F6A2 /* FloatingStartPattern.swift in Sources */,
+				8459D1B91F483F24004AC3AD /* PatternDSL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8459D18D1F483EB1004AC3AD /* PatternKitTests.swift in Sources */,
+				8459D18D1F483EB1004AC3AD /* PatternTests.swift in Sources */,
+				84BF91091F4D678700ADD647 /* InterfaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +398,7 @@
 		8459D1931F483EB1004AC3AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -345,6 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.architechies.cocoa.PatternKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -352,6 +421,7 @@
 		8459D1941F483EB1004AC3AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -373,6 +443,7 @@
 		8459D1961F483EB1004AC3AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KAX32K2J35;
 				INFOPLIST_FILE = PatternKitTests/Info.plist;
@@ -386,6 +457,7 @@
 		8459D1971F483EB1004AC3AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KAX32K2J35;
 				INFOPLIST_FILE = PatternKitTests/Info.plist;
