@@ -82,7 +82,7 @@ When implementing patterns, you may find the `trace(…)` function useful. It wr
 
 ## Status
 
-**This library is not production-ready.** It is a proof of concept and its interface is likely to change radically in the future. 
+**This library is not production-ready.** It is a proof of concept and its interface is likely to change radically in the future. Nor is there any guarantee it will ever *be* production-ready—that depends on whether people think it might be useful.
 
 ### Not yet supported
 
