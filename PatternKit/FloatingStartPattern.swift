@@ -24,18 +24,21 @@ struct FloatingStartPattern<Subpattern: PatternProtocol>: PatternProtocol {
         prefixSearcher = SearchSkipper(subpattern.mandatoryPrefix.elements)
     }
     
-    public func makeMatcher(on target: Matcher.Target.SubSequence) -> Matcher {
-        return Matcher(pattern: self, target: target)
+    public func makeMatcher(on target: Matcher.Target.SubSequence, with captures: Matcher.Captures) -> Matcher {
+        return Matcher(pattern: self, target: target, captures: captures)
     }
     
     public struct Matcher: PatternMatcher {
         public typealias Target = Subpattern.Matcher.Target
+        public typealias Captures = Subpattern.Matcher.Captures
         
         let pattern: FloatingStartPattern
+        let captures: Captures
         var target: Target.SubSequence
                 
-        init(pattern: FloatingStartPattern, target: Target.SubSequence) {
+        init(pattern: FloatingStartPattern, target: Target.SubSequence, captures: Captures) {
             self.pattern = pattern
+            self.captures = captures
             self.target = target
         }
         
@@ -69,10 +72,10 @@ struct FloatingStartPattern<Subpattern: PatternProtocol>: PatternProtocol {
             }
         }
         
-        public mutating func next() -> PatternMatch<Target>? {
+        public mutating func next() -> PatternMatch<Target, Captures>? {
             repeat {
                 skipAheadToMatchingPrefix()
-                var submatcher = pattern.subpattern.makeMatcher(on: target)
+                var submatcher = pattern.subpattern.makeMatcher(on: target, with: captures)
                 
                 // If there's a match at this location, return it.
                 if let match = submatcher.next() {

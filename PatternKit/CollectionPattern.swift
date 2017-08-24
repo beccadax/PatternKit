@@ -6,10 +6,11 @@
 //  Copyright © 2017 Architechies. All rights reserved.
 //
 
-public struct CollectionPattern<T: Collection, CollectionType: Collection>: SimplePattern
+public struct CollectionPattern<T: Collection, CollectionType: Collection, C>: SimplePattern
     where T.SubSequence: Collection, T.Element == CollectionType.Element, T.Element: Hashable
 {
     public typealias Target = T
+    public typealias Captures = C
     
     public let collection: CollectionType
     
@@ -17,7 +18,7 @@ public struct CollectionPattern<T: Collection, CollectionType: Collection>: Simp
         return (Array(collection), true)
     }
     
-    internal func match(on target: T.SubSequence) -> PatternMatch<Target>? {
+    internal func match(on target: T.SubSequence, with captures: Captures) -> PatternMatch<Target, Captures>? {
         let count: T.SubSequence.IndexDistance = numericCast(collection.count)
         guard let endIndex = target.index(target.startIndex, offsetBy: count, limitedBy: target.endIndex) else {
             return nil
@@ -29,7 +30,7 @@ public struct CollectionPattern<T: Collection, CollectionType: Collection>: Simp
             return nil
         }
         
-        return PatternMatch(contents: subtarget)
+        return PatternMatch(contents: subtarget, captures: captures)
     }
 }
 

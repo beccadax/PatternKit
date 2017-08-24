@@ -39,64 +39,73 @@ public struct GreedyRepetitionPattern<Subpattern: PatternProtocol, CountRange: C
         return combinedPrefix
     }
     
-    public func makeMatcher(on target: Matcher.Target.SubSequence) -> Matcher {
-        return Matcher(pattern: self, target: target)
+    public func makeMatcher(on target: Matcher.Target.SubSequence, with captures: Matcher.Captures) -> Matcher {
+        return Matcher(pattern: self, target: target, captures: captures)
     }
     
     public struct Matcher: PatternMatcher {
         public typealias Target = Subpattern.Matcher.Target
+        public typealias Captures = Subpattern.Matcher.Captures
         
         let pattern: GreedyRepetitionPattern
         let target: Target.SubSequence
-        var submatchers: [(matcher: Subpattern.Matcher, startIndex: Target.Index)]! = nil
+        let startCaptures: Captures
         
-        init(pattern: GreedyRepetitionPattern, target: Target.SubSequence) {
+        var submatchers: [(matcher: Subpattern.Matcher, startIndex: Target.Index, startCaptures: Captures)]! = nil
+        
+        init(pattern: GreedyRepetitionPattern, target: Target.SubSequence, captures: Captures) {
             self.pattern = pattern
             self.target = target
+            self.startCaptures = captures
         }
         
-        mutating func extendSubmatchers(startingAt startIndex: Target.Index) -> Target.Index {
+        mutating func extendSubmatchers(startingAt startIndex: Target.Index, with startCaptures: Captures) -> (Target.Index, Captures) {
             var index = startIndex
+            var captures = startCaptures
             
             while pattern.counts >= submatchers.count {
-                var submatcher = pattern.subpattern.makeMatcher(on: target[index...])
+                var submatcher = pattern.subpattern.makeMatcher(on: target[index...], with: captures)
                 guard let newMatch = submatcher.next() else {
                     break
                 }
                 
-                submatchers.append((matcher: submatcher, startIndex: index))
+                submatchers.append((matcher: submatcher, startIndex: index, startCaptures: captures))
                 index = newMatch.range.upperBound
+                captures = newMatch.captures
             }
             
-            return index
+            return (index, captures)
         }
         
-        mutating func nextIgnoringMinimumCount() -> PatternMatch<Target>? {
+        mutating func nextIgnoringMinimumCount() -> PatternMatch<Target, Captures>? {
             // Initialization
             guard submatchers != nil else {
                 self.submatchers = []
-                let firstEndIndex = extendSubmatchers(startingAt: target.startIndex)
-                return PatternMatch(contents: target[..<firstEndIndex])
+                let (firstEndIndex, firstEndCaptures) = extendSubmatchers(startingAt: target.startIndex, with: startCaptures)
+                return PatternMatch(contents: target[..<firstEndIndex], captures: firstEndCaptures)
             }
             
-            guard case (var lastSubmatcher, let index)? = submatchers.popLast() else {
+            guard case (var lastSubmatcher, let index, let captures)? = submatchers.popLast() else {
                 return nil
             }
             
             let endIndex: Target.Index
+            let endCaptures: Captures
+            
             if let nextMatch = lastSubmatcher.next() {
-                submatchers.append((lastSubmatcher, index))
-                endIndex = extendSubmatchers(startingAt: nextMatch.range.upperBound)
+                submatchers.append((lastSubmatcher, index, captures))
+                (endIndex, endCaptures) = extendSubmatchers(startingAt: nextMatch.range.upperBound, with: nextMatch.captures)
             }
             else {
                 endIndex = index
+                endCaptures = captures
             }
                 
-            return PatternMatch(contents: target[..<endIndex])
+            return PatternMatch(contents: target[..<endIndex], captures: endCaptures)
         }
         
-        public mutating func next() -> PatternMatch<Target>? {
-            var result: PatternMatch<Target>?
+        public mutating func next() -> PatternMatch<Target, Captures>? {
+            var result: PatternMatch<Target, Captures>?
             
             repeat {
                 result = nextIgnoringMinimumCount()

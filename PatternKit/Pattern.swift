@@ -53,7 +53,7 @@ public protocol PatternProtocol {
     /// - Returns: A `Matcher` which returns all possible matches.
     /// - Postcondition: All matches returned by `Matcher` have 
     ///                    `target.startIndex` as their `range.lowerBound`.
-    func makeMatcher(on target: Matcher.Target.SubSequence) -> Matcher
+    func makeMatcher(on target: Matcher.Target.SubSequence, with captures: Matcher.Captures) -> Matcher
     
     /// Returns a series of elements which must be present at the 
     /// beginning of any `target` passed to `makeMatcher(on:)` if it 
@@ -80,36 +80,39 @@ public protocol PatternProtocol {
 /// - Warning: Although `IteratorProtocol` in general treats copying an 
 ///              iterator as undefined behavior, `PatternMatcher` iterators 
 ///              must allow copying and provide value semantics.
-public protocol PatternMatcher: Sequence, IteratorProtocol where Element == PatternMatch<Target> {
+public protocol PatternMatcher: Sequence, IteratorProtocol where Element == PatternMatch<Target, Captures> {
     associatedtype Target where Target.Element: Hashable
+    associatedtype Captures
 }
 
 /// A simple pattern is one which can only match in one way, so there 
 /// is no need to explore a large number of potential matches.
-internal protocol SimplePattern: PatternProtocol where Matcher == SimplePatternMatcher<Target> {
+internal protocol SimplePattern: PatternProtocol where Matcher == SimplePatternMatcher<Target, Captures> {
     associatedtype Target
-    func match(on target: Target.SubSequence) -> PatternMatch<Target>?
+    associatedtype Captures
+    func match(on target: Target.SubSequence, with captures: Matcher.Captures) -> PatternMatch<Target, Captures>?
 }
 
-public struct SimplePatternMatcher<T: Collection>: PatternMatcher
+public struct SimplePatternMatcher<T: Collection, C>: PatternMatcher
     where T.SubSequence: Collection, T.Element: Hashable
 {
     public typealias Target = T
+    public typealias Captures = C
     
-    var value: PatternMatch<Target>?
+    var value: PatternMatch<Target, Captures>?
     
-    init(_ value: PatternMatch<Target>?) {
+    init(_ value: PatternMatch<Target, Captures>?) {
         self.value = value
     }
     
-    public mutating func next() -> PatternMatch<Target>? {
+    public mutating func next() -> PatternMatch<Target, Captures>? {
         defer { value = nil }
         return value
     }
 }
 
 extension SimplePattern {
-    public func makeMatcher(on target: Target.SubSequence) -> SimplePatternMatcher<Target> {
-        return SimplePatternMatcher(match(on: target))
+    public func makeMatcher(on target: Target.SubSequence, with captures: Captures) -> SimplePatternMatcher<Target, Captures> {
+        return SimplePatternMatcher(match(on: target, with: captures))
     }
 }

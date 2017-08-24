@@ -6,13 +6,15 @@
 //  Copyright © 2017 Architechies. All rights reserved.
 //
 
-public func pattern<P: PatternProtocol>(_ pattern: P) -> P {
+public func pattern<P: PatternProtocol>(_ pattern: P) -> P
+    where P.Matcher.Captures == Void
+{
     return pattern
 }
 
 extension Collection {
     static func pattern<P: PatternProtocol>(_ pattern: P) -> P
-        where P.Matcher.Target == Self
+        where P.Matcher.Target == Self, P.Matcher.Captures == Void
     {
         return pattern
     }
@@ -20,7 +22,7 @@ extension Collection {
 
 postfix operator /
 
-public postfix func /<C: Collection, T: Collection>(collection: C) -> CollectionPattern<T, C> {
+public postfix func /<C: Collection, T: Collection, Captures>(collection: C) -> CollectionPattern<T, C, Captures> {
     return CollectionPattern(collection: collection)
 }
 
@@ -58,44 +60,44 @@ extension PatternProtocol {
     }
 }
 
-public func any<T: Collection>(where predicate: @escaping (T.Element) -> Bool) -> ElementPredicatePattern<T> {
+public func any<T: Collection, Captures>(where predicate: @escaping (T.Element) -> Bool) -> ElementPredicatePattern<T, Captures> {
     return ElementPredicatePattern(predicate: predicate)
 }
 
-public func any<T: Collection>(of permitted: Set<T.Element>) -> ElementPredicatePattern<T> {
+public func any<T: Collection, Captures>(of permitted: Set<T.Element>) -> ElementPredicatePattern<T, Captures> {
     return any(where: permitted.contains)
 }
 
-public func any<T: Collection, S: SetAlgebra>(of permitted: S) -> ElementPredicatePattern<T>
+public func any<T: Collection, S: SetAlgebra, Captures>(of permitted: S) -> ElementPredicatePattern<T, Captures>
     where S.Element == T.Element
 {
     return any(where: permitted.contains)
 }
 
-public func any<T: Collection, S: Sequence>(of permitted: S) -> ElementPredicatePattern<T>
+public func any<T: Collection, S: Sequence, Captures>(of permitted: S) -> ElementPredicatePattern<T, Captures>
     where S.Element == T.Element
 {
     return any(of: Set(permitted))
 }
 
-public func any<T: Collection, R: RangeExpression>(of permitted: R) -> ElementPredicatePattern<T>
+public func any<T: Collection, R: RangeExpression, Captures>(of permitted: R) -> ElementPredicatePattern<T, Captures>
     where R.Bound == T.Element
 {
     return any(where: permitted.contains)
 }
 
 
-public func any<T: Collection>(_ first: T.Element, _ rest: T.Element...) -> ElementPredicatePattern<T>
+public func any<T: Collection, Captures>(_ first: T.Element, _ rest: T.Element...) -> ElementPredicatePattern<T, Captures>
     where T.Element: Hashable
 {
     return any(of: [first] + rest)
 }
 
-public func any<T: Collection>() -> ElementPredicatePattern<T> {
+public func any<T: Collection, Captures>() -> ElementPredicatePattern<T, Captures> {
     return ElementPredicatePattern { _ in true } 
 }
 
-public prefix func !<T>(any: ElementPredicatePattern<T>) -> ElementPredicatePattern<T> {
+public prefix func !<T, Captures>(any: ElementPredicatePattern<T, Captures>) -> ElementPredicatePattern<T, Captures> {
     let predicate = any.predicate
     return ElementPredicatePattern { !predicate($0) }
 } 

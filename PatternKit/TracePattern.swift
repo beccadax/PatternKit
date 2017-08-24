@@ -34,32 +34,33 @@ public struct TracePattern<Subpattern: PatternProtocol>: PatternProtocol {
         return prefixInfo
     }
     
-    public func makeMatcher(on target: Matcher.Target.SubSequence) -> Matcher {
-        return Matcher(subpattern: subpattern, target: target)
+    public func makeMatcher(on target: Matcher.Target.SubSequence, with captures: Matcher.Captures) -> Matcher {
+        return Matcher(subpattern: subpattern, target: target, captures: captures)
     }
     
     public struct Matcher: PatternMatcher {
         public typealias Target = Subpattern.Matcher.Target
+        public typealias Captures = Subpattern.Matcher.Captures
         
         var submatcher: Subpattern.Matcher
         let counter: Int
         
-        init(subpattern: Subpattern, target: Target.SubSequence) {
-            self.submatcher = subpattern.makeMatcher(on: target)
+        init(subpattern: Subpattern, target: Target.SubSequence, captures: Captures) {
+            self.submatcher = subpattern.makeMatcher(on: target, with: captures)
             
             sharedCounter += 1
             counter = sharedCounter
             
-            print(counter, "Matching \(subpattern) at \(formatIndex(target.startIndex)) of [\(target)]")
+            print(counter, "Matching \(subpattern) at \(formatIndex(target.startIndex)) of [\(target)] with \(captures)")
         }
         
-        public mutating func next() -> PatternMatch<Target>? {
+        public mutating func next() -> PatternMatch<Target, Captures>? {
             guard let match = submatcher.next() else {
-                print(counter, "    ...done")
+                print(counter, "    ...exhausted all matches")
                 return nil
             }
             
-            print(counter, "    ...[\(match.contents)] at \(formatIndex(match.range.upperBound))")
+            print(counter, "    ...[\(match.contents)] at \(formatIndex(match.range.upperBound)) with \(match.captures)")
             return match
         }
     }
