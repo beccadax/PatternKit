@@ -102,3 +102,37 @@ public prefix func !<T, Captures>(any: ElementPredicatePattern<T, Captures>) -> 
     return ElementPredicatePattern { !predicate($0) }
 } 
 
+public func capture<Subpattern: PatternProtocol>(_ pattern: Subpattern, from startingValue: Subpattern.Matcher.Captures) -> CapturePattern<Subpattern> {
+    return CapturePattern(subpattern: pattern, startingValue: startingValue)
+}
+
+public func capture<Subpattern: PatternProtocol>(_ pattern: Subpattern) -> CapturePattern<Subpattern>
+    where Subpattern.Matcher.Captures == Void
+{
+    return capture(pattern, from: ())
+}
+
+extension PatternProtocol {
+    public func into<Captures>(_ keyPath: WritableKeyPath<Captures, Matcher.Captures>) -> CaptureIntoPattern<Self, Captures> {
+        return CaptureIntoPattern(subpattern: self, keyPath: keyPath)
+    }
+}
+
+extension PatternProtocol {
+    public func map<TransformedCaptures>(from startingValue: Matcher.Captures, transform: @escaping (Matcher.Captures) -> TransformedCaptures) -> CaptureMapPattern<Self, TransformedCaptures> {
+        return CaptureMapPattern(subpattern: self, startingValue: startingValue, transform: transform)
+    }
+}
+
+extension PatternProtocol where Matcher.Captures: ExpressibleByNilLiteral {
+    public func map<TransformedCaptures>(transform: @escaping (Matcher.Captures) -> TransformedCaptures) -> CaptureMapPattern<Self, TransformedCaptures> {
+        return CaptureMapPattern(subpattern: self, startingValue: nil, transform: transform)
+    }
+}
+
+extension PatternProtocol where Matcher.Captures: RangeReplaceableCollection {
+    public func map<TransformedCaptures>(transform: @escaping (Matcher.Captures) -> TransformedCaptures) -> CaptureMapPattern<Self, TransformedCaptures> {
+        return CaptureMapPattern(subpattern: self, startingValue: Matcher.Captures(), transform: transform)
+    }
+}
+

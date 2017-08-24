@@ -10,6 +10,7 @@
 		844706091F4D8464003B481D /* SequenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844706081F4D8464003B481D /* SequenceWindow.swift */; };
 		8447060B1F4D84A4003B481D /* SearchSkipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447060A1F4D84A4003B481D /* SearchSkipper.swift */; };
 		8447060E1F4E3E26003B481D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8447060D1F4E3E26003B481D /* LICENSE */; };
+		844706101F4E7907003B481D /* CapturePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447060F1F4E7907003B481D /* CapturePattern.swift */; };
 		8459D1881F483EB1004AC3AD /* PatternKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8459D17E1F483EB1004AC3AD /* PatternKit.framework */; };
 		8459D18D1F483EB1004AC3AD /* PatternTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459D18C1F483EB1004AC3AD /* PatternTests.swift */; };
 		8459D18F1F483EB1004AC3AD /* PatternKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8459D1811F483EB1004AC3AD /* PatternKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,6 +44,7 @@
 		8447060A1F4D84A4003B481D /* SearchSkipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSkipper.swift; sourceTree = "<group>"; };
 		8447060C1F4E2EB4003B481D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8447060D1F4E3E26003B481D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8447060F1F4E7907003B481D /* CapturePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePattern.swift; sourceTree = "<group>"; };
 		8459D17E1F483EB1004AC3AD /* PatternKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PatternKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8459D1811F483EB1004AC3AD /* PatternKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternKit.h; sourceTree = "<group>"; };
 		8459D1821F483EB1004AC3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8459D19F1F483EC2004AC3AD /* MatchCollection.swift */,
 				8459D19B1F483EC2004AC3AD /* PatternDSL.swift */,
 				8459D1A31F483EC2004AC3AD /* AlternationPattern.swift */,
+				8447060F1F4E7907003B481D /* CapturePattern.swift */,
 				8459D1A21F483EC2004AC3AD /* ConcatenationPattern.swift */,
 				8459D1991F483EC2004AC3AD /* CollectionPattern.swift */,
 				8459D19C1F483EC2004AC3AD /* ElementPredicatePattern.swift */,
@@ -258,6 +261,7 @@
 				8459D1B61F483F24004AC3AD /* ElementPredicatePattern.swift in Sources */,
 				8459D1B01F483F24004AC3AD /* AlternationPattern.swift in Sources */,
 				8447060B1F4D84A4003B481D /* SearchSkipper.swift in Sources */,
+				844706101F4E7907003B481D /* CapturePattern.swift in Sources */,
 				848320681F49B2B60091F6A2 /* FloatingStartPattern.swift in Sources */,
 				8459D1B91F483F24004AC3AD /* PatternDSL.swift in Sources */,
 			);
